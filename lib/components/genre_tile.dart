@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; // Corrected the import statement
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/models/genre.dart';
 

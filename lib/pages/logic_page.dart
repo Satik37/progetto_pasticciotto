@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi/pages/categories_page.dart';
-import 'package:sushi/pages/credits_and_support_page.dart';
-import 'package:sushi/pages/intro_page.dart';
-import 'package:sushi/pages/settings_page.dart';
 import 'package:sushi/themes/colors.dart';
 
 class LogicPage extends StatefulWidget {
@@ -24,17 +20,17 @@ class _LogicPageState extends State<LogicPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.blue,
             expandedHeight: 200,
             floating: true,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                'images/skull18.png',
+                'images/devilDrugs.png',
                 fit: BoxFit.cover,
               ),
               title: Text(
-                'Flexible Title',
+                'Logic and Deduction',
                 style: GoogleFonts.dmSerifDisplay(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 25,
@@ -43,7 +39,7 @@ class _LogicPageState extends State<LogicPage> {
               centerTitle: true,
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.blue),
+              icon: Icon(Icons.arrow_back, color: Colors.red),
               onPressed: () {
                 Navigator.pop(context);
               },

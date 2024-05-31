@@ -21,8 +21,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
   List genres = [
     // Logic and Deduction
     Genre(name: 'Logic and Deduction', imagePath: 'images/manAndSkull.png'),
-    // Historical fiction
-    Genre(name: 'Historical fiction', imagePath: 'images/medievalWriting.png'),
+    // Historical Fiction
+    Genre(name: 'Historical Fiction', imagePath: 'images/medievalWriting.png'),
     // Science
     // Fantasy
     // Mystery
@@ -42,7 +42,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
           MaterialPageRoute(builder: (context) => const LogicPage()),
         );
         break;
-      case 'Historical fiction':
+      case 'Historical Fiction':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HistoricalPage()),

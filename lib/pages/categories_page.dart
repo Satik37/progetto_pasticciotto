@@ -220,28 +220,29 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
           const SizedBox(height: 25),
           // search bar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextField(
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                hintText: "Search a story...",
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          //   child: TextField(
+          //     decoration: InputDecoration(
+          //       focusedBorder: OutlineInputBorder(
+          //         borderSide: BorderSide(
+          //           color: Color.fromARGB(255, 255, 255, 255),
+          //         ),
+          //         borderRadius: BorderRadius.circular(20),
+          //       ),
+          //       enabledBorder: OutlineInputBorder(
+          //         borderSide: BorderSide(
+          //           color: Color.fromARGB(255, 255, 255, 255),
+          //         ),
+          //         borderRadius: BorderRadius.circular(20),
+          //       ),
+          //       hintText: "Search a story...",
+          //     ),
+          //   ),
+          // ),
 
-          const SizedBox(height: 25),
+          // const SizedBox(height: 25),
+
           // categories list
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -249,7 +250,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               'Genres',
               style: GoogleFonts.dmSerifDisplay(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 25,
                 color: Color.fromARGB(200, 255, 255, 255),
               ),
             ),

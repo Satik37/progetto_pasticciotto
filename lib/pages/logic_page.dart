@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/puzzles_tile.dart';
-import 'package:sushi/pages/puzzles_detail_page.dart';
-import 'package:sushi/themes/colors.dart';
+import 'package:sushi/pages/logic_puzzles_details.dart';
 
 class LogicPage extends StatefulWidget {
   const LogicPage({super.key});
@@ -21,7 +20,7 @@ class _LogicPageState extends State<LogicPage> {
       'description':
           'Two friends order the same drink at a restaurant. One drinks it slowly and survives; the other drinks it quickly and dies. The drink was poisoned. Why did one survive?',
       'answer':
-          'The poison was in the ice. The friend who drank slowly allowed the ice to melt, releasing the poison. The friend who drank quickly did not.',
+          'The poison was in the ice. The friend who drank slowly allowed the ice to melt, releasing the poison. The friend who drank quickly did not. LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM ',
     },
     //  2
     {
@@ -103,9 +102,9 @@ class _LogicPageState extends State<LogicPage> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.blue,
+              Color.fromARGB(255, 33, 149, 243),
               // Colors.grey,
-              const Color.fromARGB(255, 50, 50, 50),
+              Color.fromARGB(255, 50, 50, 50),
             ],
           ),
         ),
@@ -133,22 +132,58 @@ class _LogicPageState extends State<LogicPage> {
                     expandedHeight: 200,
                     floating: true,
                     pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Image.asset(
-                        'images/devilDrugs.png',
-                        fit: BoxFit.cover,
-                      ),
-                      title: Text(
-                        'Logic and Deduction',
-                        style: GoogleFonts.dmSerifDisplay(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 25,
+                    flexibleSpace: Stack(
+                      children: [
+                        // Custom gradient background for SliverAppBar
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topRight,
+                              end: Alignment.bottomLeft,
+                              colors: [
+                                Color.fromARGB(250, 33, 149, 243),
+                                Color.fromARGB(250, 50, 50, 50),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                      centerTitle: true,
+                        FlexibleSpaceBar(
+                          background: Image.asset(
+                            'images/devilDrugs.png',
+                            fit: BoxFit.cover,
+                          ),
+                          title: Text(
+                            'Logic and Deduction',
+                            style: GoogleFonts.dmSerifDisplay(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 25,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 25.0,
+                                  color:
+                                      const Color.fromARGB(255, 33, 149, 243),
+                                  offset: Offset(2.0, 2.0),
+                                )
+                              ],
+                            ),
+                          ),
+                          centerTitle: true,
+                        ),
+                      ],
                     ),
                     leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.red),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 35,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 25.0,
+                            color: Color.fromARGB(255, 33, 149, 243),
+                            offset: Offset(2.0, 2.0),
+                          )
+                        ],
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -191,6 +226,13 @@ class _LogicPageState extends State<LogicPage> {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
+                                        shadows: [
+                                          Shadow(
+                                            blurRadius: 25.0,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            offset: Offset(2.0, 2.0),
+                                          )
+                                        ],
                                       ),
                                     ),
                                     const SizedBox(height: 5),
@@ -231,7 +273,8 @@ class _LogicPageState extends State<LogicPage> {
             return PuzzlesTile(
               imagePath: puzzle['path']!,
               puzzleName: puzzle['name']!,
-              puzzleColor: Colors.blue, // Customize the color as needed
+              puzzleColor: const Color.fromARGB(
+                  175, 33, 149, 243), // Customize the color as needed
               onTap: () {
                 // Navigate to a new page for each puzzle
                 Navigator.push(

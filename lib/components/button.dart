@@ -30,6 +30,13 @@ class MyButton extends StatelessWidget {
               style: GoogleFonts.dmSerifDisplay(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 fontSize: 17,
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
             ),
 
@@ -39,6 +46,13 @@ class MyButton extends StatelessWidget {
             Icon(
               Icons.chevron_right,
               color: const Color.fromARGB(255, 255, 255, 255),
+              shadows: [
+                Shadow(
+                  blurRadius: 25.0,
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  offset: Offset(2.0, 2.0),
+                )
+              ],
             ),
           ],
         ),

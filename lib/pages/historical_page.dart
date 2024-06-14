@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi/themes/colors.dart';
 import '../components/puzzles_tile.dart';
-import 'puzzles_detail_page.dart';
+import 'historical_puzzles_details.dart';
 
 class HistoricalPage extends StatefulWidget {
   const HistoricalPage({super.key});
@@ -13,15 +12,15 @@ class HistoricalPage extends StatefulWidget {
 
 class _HistoricalPageState extends State<HistoricalPage> {
   // List of image paths
-  final List<Map<String, String>> puzzles = [
+  final List<Map<String, String>> historicalPuzzles = [
     //  1
     {
       'path': 'images/danzaDeLaMuerte10.png',
       'name': 'The Disappearing General',
       'description':
-          'During the Roman Empire, General Marcus was sent to the northern territories and never returned. Years later, his diary was found, ending abruptly with the words, "I have found the truth." What happened to General Marcus?',
+          'During the Roman Empire, General Marcus was sent to the northern territories and never returned. Years later, his diary was found, ending abruptly with the words, "I have found the truth." What happened to General Marcus?LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM ',
       'answer':
-          'General Marcus discovered a betrayal within his ranks. Before he could reveal the traitors, they captured and killed him, ensuring his silence.',
+          'General Marcus discovered a betrayal within his ranks. Before he could reveal the traitors, they captured and killed him, ensuring his silence.LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM ',
     },
     //  2
     {
@@ -104,12 +103,12 @@ class _HistoricalPageState extends State<HistoricalPage> {
         // ----- Background color
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
             colors: [
-              Colors.red,
+              Color.fromARGB(255, 244, 67, 54),
               // Another Color,
-              const Color.fromARGB(255, 50, 50, 50),
+              Color.fromARGB(255, 50, 50, 50),
             ],
           ),
         ),
@@ -137,24 +136,58 @@ class _HistoricalPageState extends State<HistoricalPage> {
                     expandedHeight: 200,
                     floating: true,
                     pinned: true,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Image.asset(
-                        'images/knightHorse.png',
-                        fit: BoxFit.cover,
-                      ),
-                      title: Text(
-                        'Historical Fiction',
-                        style: GoogleFonts.dmSerifDisplay(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 25,
+                    flexibleSpace: Stack(
+                      children: [
+                        // Custom gradient background for SliverAppBar
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topRight,
+                              end: Alignment.bottomLeft,
+                              colors: [
+                                Color.fromARGB(255, 244, 67, 54),
+                                Color.fromARGB(255, 50, 50, 50),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                      centerTitle: true,
+                        FlexibleSpaceBar(
+                          background: Image.asset(
+                            'images/knightHorse.png',
+                            fit: BoxFit.cover,
+                          ),
+                          title: Text(
+                            'Historical Fiction',
+                            style: GoogleFonts.dmSerifDisplay(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 25,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 25.0,
+                                  color: const Color.fromARGB(255, 244, 67, 54),
+                                  offset: Offset(2.0, 2.0),
+                                )
+                              ],
+                            ),
+                          ),
+                          centerTitle: true,
+                        ),
+                      ],
                     ),
+
+                    // Arrow to move back to the previous page
                     leading: IconButton(
                       icon: Icon(
                         Icons.arrow_back,
-                        color: Colors.blue,
+                        size: 35,
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        shadows: [
+                          Shadow(
+                            blurRadius: 25.0,
+                            color: Color.fromARGB(255, 244, 67, 54),
+                            offset: Offset(2.0, 2.0),
+                          )
+                        ],
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -176,7 +209,7 @@ class _HistoricalPageState extends State<HistoricalPage> {
                             color: const Color.fromARGB(155, 50, 50, 50),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                              color: Colors.red,
+                              color: const Color.fromARGB(255, 244, 67, 54),
                               width: 2,
                             ),
                           ),
@@ -198,6 +231,14 @@ class _HistoricalPageState extends State<HistoricalPage> {
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
+                                        shadows: [
+                                          Shadow(
+                                            blurRadius: 25.0,
+                                            color: const Color.fromARGB(
+                                                255, 0, 0, 0),
+                                            offset: Offset(2.0, 2.0),
+                                          )
+                                        ],
                                       ),
                                     ),
                                     const SizedBox(height: 5),
@@ -232,19 +273,21 @@ class _HistoricalPageState extends State<HistoricalPage> {
           primary: false,
           shrinkWrap: true,
           padding: const EdgeInsets.all(10),
-          itemCount: puzzles.length,
+          itemCount: historicalPuzzles.length,
           itemBuilder: (context, index) {
-            final puzzle = puzzles[index];
+            final historicalPuzzle = historicalPuzzles[index];
             return PuzzlesTile(
-              imagePath: puzzle['path']!,
-              puzzleName: puzzle['name']!,
-              puzzleColor: Colors.red, // Customize the color as needed
+              imagePath: historicalPuzzle['path']!,
+              puzzleName: historicalPuzzle['name']!,
+              puzzleColor: Color.fromARGB(175, 244, 67, 54)
+                  .withOpacity(0.7), // Customize the color as needed
               onTap: () {
                 // Navigate to a new page for each puzzle
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PuzzleDetailPage(puzzle: puzzle),
+                    builder: (context) => HistoricalPuzzlesDetails(
+                        historicalPuzzle: historicalPuzzle),
                   ),
                 );
               },

@@ -24,7 +24,7 @@ class PuzzlesTile extends StatelessWidget {
           color: puzzleColor,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: Colors.orange,
+            color: puzzleColor,
             width: 2,
           ),
           image: DecorationImage(
@@ -43,6 +43,13 @@ class PuzzlesTile extends StatelessWidget {
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  blurRadius: 25.0,
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  offset: Offset(2.0, 2.0),
+                )
+              ],
             ),
             textAlign: TextAlign.center,
           ),

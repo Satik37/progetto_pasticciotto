@@ -18,7 +18,7 @@ class GenreTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 75, 75, 75),
+          color: const Color.fromARGB(155, 50, 50, 50),
           borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.only(left: 25),
@@ -41,6 +41,13 @@ class GenreTile extends StatelessWidget {
               style: GoogleFonts.dmSerifDisplay(
                 fontSize: 20,
                 color: Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
             )
           ],

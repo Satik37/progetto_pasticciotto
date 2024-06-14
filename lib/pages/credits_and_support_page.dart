@@ -29,6 +29,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
               icon: Icon(
                 Icons.menu,
                 color: const Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
@@ -37,10 +44,17 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
           },
         ),
         title: Text(
-          'Progetto Pasticciotto',
+          'PROGETTO PASTICCIOTTO',
           style: GoogleFonts.dmSerifDisplay(
             color: const Color.fromARGB(255, 255, 255, 255),
             fontSize: 25,
+            shadows: [
+              Shadow(
+                blurRadius: 25.0,
+                color: Color.fromARGB(255, 255, 217, 0),
+                offset: Offset(2.0, 2.0),
+              )
+            ],
           ),
         ),
         centerTitle: true,
@@ -62,6 +76,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
                 style: GoogleFonts.dmSerifDisplay(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 30,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 25.0,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      offset: Offset(2.0, 2.0),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -72,6 +93,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
                 style: GoogleFonts.dmSerifDisplay(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 22,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 25.0,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      offset: Offset(2.0, 2.0),
+                    )
+                  ],
                 ),
               ),
               onTap: () {
@@ -89,6 +117,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
                 style: GoogleFonts.dmSerifDisplay(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 22,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 25.0,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      offset: Offset(2.0, 2.0),
+                    )
+                  ],
                 ),
               ),
               onTap: () {
@@ -107,6 +142,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
                 style: GoogleFonts.dmSerifDisplay(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 22,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 25.0,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      offset: Offset(2.0, 2.0),
+                    )
+                  ],
                 ),
               ),
               onTap: () {
@@ -124,6 +166,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
                 style: GoogleFonts.dmSerifDisplay(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 22,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 25.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      offset: Offset(2.0, 2.0),
+                    ),
+                  ],
                 ),
               ),
               onTap: () {
@@ -150,10 +199,28 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
               height: 25,
             ),
 
-            // icon
+            // image with color filter and shadow
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Image.asset('images/writerWoman.png'),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.teal.withOpacity(0.7),
+                      spreadRadius: 5,
+                      blurRadius: 100,
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                    Colors.red.withOpacity(0.7),
+                    BlendMode.srcATop,
+                  ),
+                  child: Image.asset('images/writerWoman.png'),
+                ),
+              ),
             ),
 
             const SizedBox(
@@ -166,6 +233,13 @@ class _CreditsAndSupportState extends State<CreditsAndSupport> {
               style: GoogleFonts.dmSerifDisplay(
                 fontSize: 44,
                 color: Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: const Color.fromARGB(255, 244, 67, 245),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
             ),
           ],

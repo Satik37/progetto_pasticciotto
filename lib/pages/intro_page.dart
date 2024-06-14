@@ -24,10 +24,17 @@ class IntroPage extends StatelessWidget {
               style: GoogleFonts.dmSerifDisplay(
                 fontSize: 28,
                 color: Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: Color.fromARGB(255, 255, 217, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
             ),
 
-            // icon
+            // image
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Image.asset('images/DeathsRamble.png'),
@@ -43,6 +50,13 @@ class IntroPage extends StatelessWidget {
               style: GoogleFonts.dmSerifDisplay(
                 fontSize: 44,
                 color: Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: Color.fromARGB(255, 0, 220, 200),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
             ),
 
@@ -55,7 +69,14 @@ class IntroPage extends StatelessWidget {
               style: TextStyle(
                 color: const Color.fromARGB(155, 255, 255, 255),
                 height: 2,
-                fontSize: 13,
+                fontSize: 15,
+                shadows: [
+                  Shadow(
+                    blurRadius: 25.0,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
             ),
 

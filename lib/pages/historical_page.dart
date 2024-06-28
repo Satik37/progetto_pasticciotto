@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/puzzles_tile.dart';
 import 'historical_puzzles_details.dart';
@@ -10,7 +12,8 @@ class HistoricalPage extends StatefulWidget {
   State<HistoricalPage> createState() => _HistoricalPageState();
 }
 
-class _HistoricalPageState extends State<HistoricalPage> {
+class _HistoricalPageState extends State<HistoricalPage>
+    with SingleTickerProviderStateMixin {
   // List of image paths
   final List<Map<String, String>> historicalPuzzles = [
     //  1
@@ -98,188 +101,245 @@ class _HistoricalPageState extends State<HistoricalPage> {
     // Add more image paths as needed
   ];
 
+  late AnimationController _controller;
+  late Animation<Alignment> _topAlignmentAnimation;
+  late Animation<Alignment> _bottomAlignmentAnimation;
+
   @override
-  Widget build(BuildContext context) => Container(
-        // ----- Background color
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 244, 67, 54),
-              // Another Color,
-              Color.fromARGB(255, 50, 50, 50),
-            ],
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    );
+    // first color animation
+    _topAlignmentAnimation = _createAnimation([
+      Alignment.topLeft,
+      Alignment.topRight,
+      //Alignment.bottomRight,
+      //Alignment.bottomLeft,
+    ]);
+
+    _bottomAlignmentAnimation = _createAnimation([
+      Alignment.bottomRight,
+      Alignment.bottomLeft,
+      //Alignment.topLeft,
+      //Alignment.topRight,
+    ]);
+
+    _controller.repeat();
+  }
+
+  Animation<Alignment> _createAnimation(List<Alignment> alignments) {
+    return TweenSequence<Alignment>(
+      alignments
+          .asMap()
+          .entries
+          .map((entry) => TweenSequenceItem(
+                tween: Tween(
+                    begin: entry.value,
+                    end: alignments[(entry.key + 1) % alignments.length]),
+                weight: 1,
+              ))
+          .toList(),
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+// --- MAIN BUILDING
+
+  @override
+  Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(375, 812));
+
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: _topAlignmentAnimation.value,
+              end: _bottomAlignmentAnimation.value,
+              colors: const [
+                Color.fromARGB(255, 244, 67, 54),
+                Color.fromARGB(255, 152, 58, 52),
+                Color.fromARGB(255, 50, 50, 50),
+              ],
+            ),
           ),
-        ),
-        // backgroundColor: const Color.fromARGB(255, 100, 100, 100),
+          // ----- Body
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Stack(
+              fit: StackFit.expand,
 
-        // ----- Body
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Stack(
-            fit: StackFit.expand,
+              // ----- Add background image
+              children: [
+                //   Image.asset(
+                //     'images/skull18.png',
+                //     fit: BoxFit.cover,
+                //   ),
 
-            // ----- Add background image
-            children: [
-              //   Image.asset(
-              //     'images/skull18.png',
-              //     fit: BoxFit.cover,
-              //   ),
+                // ----- sliver app bar
 
-              // ----- sliver app bar
-
-              CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    backgroundColor: Colors.transparent,
-                    expandedHeight: 200,
-                    floating: true,
-                    pinned: true,
-                    flexibleSpace: Stack(
-                      children: [
-                        // Custom gradient background for SliverAppBar
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                Color.fromARGB(255, 244, 67, 54),
-                                Color.fromARGB(255, 50, 50, 50),
-                              ],
+                CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      backgroundColor: Colors.transparent,
+                      expandedHeight: 200.h,
+                      floating: true,
+                      pinned: true,
+                      flexibleSpace: Stack(
+                        children: [
+                          // Custom gradient background for SliverAppBar
+                          Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  Color.fromARGB(255, 244, 67, 54),
+                                  Color.fromARGB(255, 50, 50, 50),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        FlexibleSpaceBar(
-                          background: Image.asset(
-                            'images/knightHorse.png',
-                            fit: BoxFit.cover,
-                          ),
-                          title: Text(
-                            'Historical Fiction',
-                            style: GoogleFonts.dmSerifDisplay(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 25,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 25.0,
-                                  color: const Color.fromARGB(255, 244, 67, 54),
-                                  offset: Offset(2.0, 2.0),
-                                )
-                              ],
+                          FlexibleSpaceBar(
+                            background: Image.asset(
+                              'images/knightHorse.png',
+                              fit: BoxFit.cover,
                             ),
+                            title: Text(
+                              'Historical Fiction',
+                              style: GoogleFonts.pirataOne(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontSize: 35.sp,
+                                shadows: [
+                                  const Shadow(
+                                    blurRadius: 25.0,
+                                    color: Color.fromARGB(255, 244, 67, 54),
+                                    offset: Offset(2.0, 2.0),
+                                  )
+                                ],
+                              ),
+                            ),
+                            centerTitle: true,
                           ),
-                          centerTitle: true,
-                        ),
-                      ],
-                    ),
-
-                    // Arrow to move back to the previous page
-                    leading: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 35,
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        shadows: [
-                          Shadow(
-                            blurRadius: 25.0,
-                            color: Color.fromARGB(255, 244, 67, 54),
-                            offset: Offset(2.0, 2.0),
-                          )
                         ],
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+
+                      // Arrow to move back to the previous page
+                      leading: IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.angleLeft,
+                          size: 35.sp,
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          shadows: const [
+                            Shadow(
+                              blurRadius: 25.0,
+                              color: Color.fromARGB(255, 244, 67, 54),
+                              offset: Offset(2.0, 2.0),
+                            )
+                          ],
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
-                  ),
 
-                  // end of bar
+                    // end of bar
 
-                  // sliver list
+                    // sliver list
 
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        // promo banner
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          // promo banner
 
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(155, 50, 50, 50),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 244, 67, 54),
-                              width: 2,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(155, 50, 50, 50),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: const Color.fromARGB(255, 244, 67, 54),
+                                width: 2.w,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(
+                                left: 25.w, right: 25.w, bottom: 0, top: 20.h),
+                            padding: EdgeInsets.all(10.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // promo message
+
+                                      Text(
+                                        'Echoes of the fallen:                     history\'s darkest hours reimagined.',
+                                        style: GoogleFonts.federant(
+                                          fontSize: 20.sp,
+                                          color: Colors.white,
+                                          shadows: [
+                                            const Shadow(
+                                              blurRadius: 25.0,
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0),
+                                              offset: Offset(2.0, 2.0),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 5.h),
+                                    ],
+                                  ),
+                                ),
+
+                                // add more widgets here
+                              ],
                             ),
                           ),
-                          margin: const EdgeInsets.only(
-                              left: 25, right: 25, bottom: 0, top: 20),
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // promo message
-
-                                    Text(
-                                      'Echoes of the fallen:                     history\'s darkest hours reimagined.',
-                                      style: GoogleFonts.dmSerifDisplay(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        shadows: [
-                                          Shadow(
-                                            blurRadius: 25.0,
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0),
-                                            offset: Offset(2.0, 2.0),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                  ],
-                                ),
-                              ),
-
-                              // add more widgets here
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  buildImages(),
-                ],
-              ),
-            ],
+                    buildImages(),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      );
-
+        );
+      },
+    );
+  }
   // image grid
 
   Widget buildImages() => SliverToBoxAdapter(
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+            crossAxisSpacing: 10.w,
+            mainAxisSpacing: 10.h,
           ),
           primary: false,
           shrinkWrap: true,
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10.w),
           itemCount: historicalPuzzles.length,
           itemBuilder: (context, index) {
             final historicalPuzzle = historicalPuzzles[index];
             return PuzzlesTile(
               imagePath: historicalPuzzle['path']!,
               puzzleName: historicalPuzzle['name']!,
-              puzzleColor: Color.fromARGB(175, 244, 67, 54)
+              puzzleColor: const Color.fromARGB(175, 244, 67, 54)
                   .withOpacity(0.7), // Customize the color as needed
               onTap: () {
                 // Navigate to a new page for each puzzle

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/models/genre.dart';
 
@@ -18,8 +19,8 @@ class GenreTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(155, 50, 50, 50),
-          borderRadius: BorderRadius.circular(20),
+          color: const Color.fromARGB(255, 75, 75, 75),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         margin: const EdgeInsets.only(left: 25),
         padding: const EdgeInsets.all(25),
@@ -38,13 +39,13 @@ class GenreTile extends StatelessWidget {
             // text
             Text(
               genre.name,
-              style: GoogleFonts.dmSerifDisplay(
-                fontSize: 20,
-                color: Color.fromARGB(255, 255, 255, 255),
+              style: GoogleFonts.pirataOne(
+                fontSize: 21.sp,
+                color: const Color.fromARGB(255, 255, 255, 255),
                 shadows: [
-                  Shadow(
+                  const Shadow(
                     blurRadius: 25.0,
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: Color.fromARGB(255, 0, 0, 0),
                     offset: Offset(2.0, 2.0),
                   )
                 ],

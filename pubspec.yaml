@@ -37,8 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.6
   fluent_ui: ^4.8.7
   google_fonts: ^6.2.1 
+  flutter_advanced_drawer: ^1.3.6
+  flutter_screenutil: ^5.9.3
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
@@ -92,3 +96,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/doughnut.png"

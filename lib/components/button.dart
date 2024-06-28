@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyButton extends StatelessWidget {
@@ -17,41 +19,42 @@ class MyButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 100, 100, 100),
-          borderRadius: BorderRadius.circular(40),
+          color: const Color.fromARGB(255, 100, 100, 100),
+          borderRadius: BorderRadius.circular(40.r),
         ),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(17.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // text
             Text(
               text,
-              style: GoogleFonts.dmSerifDisplay(
+              style: GoogleFonts.federant(
                 color: const Color.fromARGB(255, 255, 255, 255),
-                fontSize: 17,
+                fontSize: 20.sp,
                 shadows: [
-                  Shadow(
+                  const Shadow(
                     blurRadius: 25.0,
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: Color.fromARGB(255, 0, 0, 0),
                     offset: Offset(2.0, 2.0),
                   )
                 ],
               ),
             ),
 
-            const SizedBox(width: 10),
+            SizedBox(width: 10.w),
 
             // icon
             Icon(
-              Icons.chevron_right,
+              FontAwesomeIcons.chevronRight,
+              size: 20.sp,
               color: const Color.fromARGB(255, 255, 255, 255),
-              shadows: [
+              shadows: const [
                 Shadow(
                   blurRadius: 25.0,
-                  color: const Color.fromARGB(255, 0, 0, 0),
+                  color: Color.fromARGB(255, 255, 145, 0),
                   offset: Offset(2.0, 2.0),
-                )
+                ),
               ],
             ),
           ],

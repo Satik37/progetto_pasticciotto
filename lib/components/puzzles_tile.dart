@@ -39,14 +39,14 @@ class PuzzlesTile extends StatelessWidget {
         child: Center(
           child: Text(
             puzzleName,
-            style: GoogleFonts.dmSerifDisplay(
+            style: GoogleFonts.federant(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               shadows: [
-                Shadow(
+                const Shadow(
                   blurRadius: 25.0,
-                  color: const Color.fromARGB(255, 0, 0, 0),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   offset: Offset(2.0, 2.0),
                 )
               ],

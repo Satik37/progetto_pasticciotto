@@ -389,7 +389,7 @@ class _CategoriesPageState extends State<CategoriesPage>
                           color: const Color.fromARGB(255, 215, 215, 215),
                           shadows: [
                             const Shadow(
-                              blurRadius: 15.0,
+                              blurRadius: 25.0,
                               color: Color.fromARGB(255, 0, 0, 0),
                               offset: Offset(2.0, 2.0),
                             )
@@ -419,7 +419,7 @@ class _CategoriesPageState extends State<CategoriesPage>
                 color: const Color.fromARGB(255, 255, 255, 255),
                 shadows: [
                   const Shadow(
-                    blurRadius: 15.0,
+                    blurRadius: 25.0,
                     color: Color.fromARGB(255, 0, 0, 0),
                     offset: Offset(2.0, 2.0),
                   )
@@ -470,7 +470,7 @@ class _CategoriesPageState extends State<CategoriesPage>
                       color: const Color.fromARGB(255, 215, 215, 215),
                       shadows: [
                         const Shadow(
-                          blurRadius: 15.0,
+                          blurRadius: 25.0,
                           color: Color.fromARGB(255, 0, 0, 0),
                           offset: Offset(2.0, 2.0),
                         )

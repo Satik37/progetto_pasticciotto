@@ -15,8 +15,6 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -25,8 +23,8 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(40.r),
         ),
         padding: EdgeInsets.symmetric(
-          vertical: screenWidth * 0.03,
-          horizontal: screenWidth * 0.06,
+          vertical: 15.h,
+          //horizontal: 25.w,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,28 +34,28 @@ class MyButton extends StatelessWidget {
               text,
               style: GoogleFonts.federant(
                 color: const Color.fromARGB(255, 255, 255, 255),
-                fontSize: screenWidth * 0.05,
+                fontSize: 23.sp,
                 shadows: [
                   const Shadow(
                     blurRadius: 25.0,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: Colors.orange,
                     offset: Offset(2.0, 2.0),
                   )
                 ],
               ),
             ),
 
-            SizedBox(width: screenWidth * 0.02),
+            SizedBox(width: 8.w),
 
             // icon
             Icon(
               FontAwesomeIcons.chevronRight,
-              size: screenWidth * 0.05,
+              size: 23.sp,
               color: const Color.fromARGB(255, 255, 255, 255),
               shadows: const [
                 Shadow(
-                  blurRadius: 15.0,
-                  color: Color.fromARGB(255, 255, 145, 0),
+                  blurRadius: 25.0,
+                  color: Colors.orange,
                   offset: Offset(2.0, 2.0),
                 ),
               ],

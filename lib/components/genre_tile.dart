@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sushi/models/genre.dart';
 
 class GenreTile extends StatelessWidget {
@@ -22,29 +22,27 @@ class GenreTile extends StatelessWidget {
           color: const Color.fromARGB(255, 75, 75, 75),
           borderRadius: BorderRadius.circular(20.r),
         ),
-        margin: const EdgeInsets.only(left: 25),
-        padding: const EdgeInsets.all(25),
+        margin: EdgeInsets.only(left: 20.w),
+        padding: EdgeInsets.all(20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // image
-            Expanded(
+            Container(
+              height: 200.h,
               child: Image.asset(
                 genre.imagePath,
-                // height: 100,
                 fit: BoxFit.cover,
               ),
             ),
-            // text
             Text(
               genre.name,
               style: GoogleFonts.pirataOne(
-                fontSize: 21.sp,
+                fontSize: 28.sp,
                 color: const Color.fromARGB(255, 255, 255, 255),
                 shadows: [
                   const Shadow(
-                    blurRadius: 25.0,
+                    blurRadius: 15.0,
                     color: Color.fromARGB(255, 0, 0, 0),
                     offset: Offset(2.0, 2.0),
                   )

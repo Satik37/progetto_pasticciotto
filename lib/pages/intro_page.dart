@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi/components/button.dart';
 
@@ -7,31 +8,31 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the screen size to make everything responsive
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    // Initialize ScreenUtil for responsive design
+    ScreenUtil.init(context,
+        designSize: const Size(375, 812), minTextAdapt: true);
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 75, 75, 75),
       body: Padding(
-        padding: EdgeInsets.all(screenWidth * 0.05),
+        padding: EdgeInsets.all(20.w),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
               // --- app name
               Text(
-                "PROGETTO   PASTICCIOTTO",
+                "PROGETTO PASTICCIOTTO",
                 style: GoogleFonts.pirataOne(
-                  fontSize: screenWidth * 0.1,
+                  fontSize: 37.sp,
                   color: const Color.fromARGB(255, 255, 255, 255),
                   shadows: [
                     const Shadow(
-                      blurRadius: 15.0,
-                      color: Colors.amberAccent,
+                      blurRadius: 25.0,
+                      color: Colors.amber,
                       offset: Offset(2.0, 2.0),
                     )
                   ],
@@ -40,20 +41,21 @@ class IntroPage extends StatelessWidget {
               // --- image
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: screenHeight * 0.3,
-                  maxWidth: screenWidth * 0.7,
+                  //maxHeight: 0.3.sh,
+                  maxWidth: 0.9.sw,
                 ),
                 child: Image.asset('images/DeathsRamble.png'),
               ),
               // title
+              SizedBox(height: 5.h),
               Text(
                 "The taste of death",
                 style: GoogleFonts.almendra(
-                  fontSize: screenWidth * 0.08,
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 37.sp,
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   shadows: [
                     const Shadow(
-                      blurRadius: 15.0,
+                      blurRadius: 25.0,
                       color: Color.fromARGB(255, 67, 0, 122),
                       offset: Offset(2.0, 2.0),
                     )
@@ -63,19 +65,20 @@ class IntroPage extends StatelessWidget {
               // subtitle
               Text(
                 "Feel the irony of death in these situational puzzles.",
+                textAlign: TextAlign.center,
                 style: GoogleFonts.bellefair(
                   color: const Color.fromARGB(155, 255, 255, 255),
-                  //height: 2.h,
-                  fontSize: screenWidth * 0.04,
+                  fontSize: 23.sp,
                   shadows: [
                     const Shadow(
-                      blurRadius: 15.0,
+                      blurRadius: 25.0,
                       color: Color.fromARGB(255, 0, 0, 0),
                       offset: Offset(2.0, 2.0),
                     )
                   ],
                 ),
               ),
+              SizedBox(height: 5.h),
               // --- 3 buttons
               // start
               MyButton(

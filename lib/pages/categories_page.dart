@@ -71,64 +71,9 @@ class _CategoriesPageState extends State<CategoriesPage>
     _controller.dispose();
     super.dispose();
   }
-  // OLD ANIMATION
-  // TweenSequence<Alignment>(
-  //     [
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.topLeft, end: Alignment.topRight),
-  //         weight: 1,
-  //       ),
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.topRight, end: Alignment.bottomRight),
-  //         weight: 1,
-  //       ),
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.bottomRight, end: Alignment.bottomLeft),
-  //         weight: 1,
-  //       ),
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.bottomLeft, end: Alignment.topLeft),
-  //         weight: 1,
-  //       ),
-  //     ],
-  //   ).animate(_controller);
-
-  //   // second color animation
-  //   _bottomAlignmentAnimation = TweenSequence<Alignment>(
-  //     [
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.bottomRight, end: Alignment.bottomLeft),
-  //         weight: 1,
-  //       ),
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.bottomLeft, end: Alignment.topLeft),
-  //         weight: 1,
-  //       ),
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.topLeft, end: Alignment.topRight),
-  //         weight: 1,
-  //       ),
-  //       TweenSequenceItem<Alignment>(
-  //         tween: Tween<Alignment>(
-  //             begin: Alignment.topRight, end: Alignment.bottomRight),
-  //         weight: 1,
-  //       ),
-  //     ],
-  //   ).animate(_controller);
-
-  //   // controller
-  //   _controller.repeat();
-  // }
 
 // Create a list of categories
-  List genres = [
+  List<Genre> genres = [
     // Logic and Deduction
     Genre(name: 'Logic and Deduction', imagePath: 'images/manAndSkull.png'),
     // Historical Fiction
@@ -168,12 +113,8 @@ class _CategoriesPageState extends State<CategoriesPage>
     }
   }
 
-  // --- ADVANCED SIDEBAR
-
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(375, 812));
-
     return AdvancedDrawer(
       backdrop: AnimatedBuilder(
         animation: _controller,
@@ -199,7 +140,6 @@ class _CategoriesPageState extends State<CategoriesPage>
         },
       ),
       controller: _advancedDrawerController,
-      //openRatio: 0.5,
       openScale: 0.85,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -211,11 +151,7 @@ class _CategoriesPageState extends State<CategoriesPage>
           Radius.circular(25),
         ),
       ),
-      // --- DRAWER
       drawer: const NavDrawer(),
-
-      // --- MAIN BUILDING
-      // --- APP BAR ---
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
@@ -240,8 +176,6 @@ class _CategoriesPageState extends State<CategoriesPage>
             child: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-
-              // --- icon
               leading: IconButton(
                 onPressed: _handleMenuButtonPressed,
                 icon: ValueListenableBuilder<AdvancedDrawerValue>(
@@ -254,7 +188,7 @@ class _CategoriesPageState extends State<CategoriesPage>
                             ? FontAwesomeIcons.xmark
                             : FontAwesomeIcons.bars,
                         key: ValueKey<bool>(value.visible),
-                        size: 30.sp,
+                        size: 23.w,
                         color: const Color.fromARGB(255, 255, 255, 255),
                         shadows: const [
                           Shadow(
@@ -268,16 +202,15 @@ class _CategoriesPageState extends State<CategoriesPage>
                   },
                 ),
               ),
-              // --- title
               title: Text(
                 'PROGETTO PASTICCIOTTO',
                 style: GoogleFonts.pirataOne(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 35.sp,
+                  fontSize: 37.sp,
                   shadows: [
                     const Shadow(
                       blurRadius: 25.0,
-                      color: Color.fromARGB(255, 255, 217, 0),
+                      color: Colors.amberAccent,
                       offset: Offset(2.0, 2.0),
                     )
                   ],
@@ -286,141 +219,269 @@ class _CategoriesPageState extends State<CategoriesPage>
               centerTitle: true,
             ),
           ),
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 600) {
+                return _buildTabletLayout();
+              } else {
+                return _buildMobileLayout();
+              }
+            },
+          ),
+        ),
+      ),
+    );
+  }
 
-          // --- BODY ---
-
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // --- PROMO BAR ---
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 75, 75, 75),
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                margin: EdgeInsets.symmetric(horizontal: 25.w),
-                padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 30.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // promo message
-                          Text(
-                            'Explore the grim stories of your mind.',
-                            style: GoogleFonts.federant(
-                              fontSize: 20.sp,
-                              color: const Color.fromARGB(255, 215, 215, 215),
-                              shadows: [
-                                const Shadow(
-                                  blurRadius: 25.0,
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                  offset: Offset(2.0, 2.0),
-                                )
-                              ],
-                            ),
-                          ),
-
-                          // SizedBox(height: 1.h),
-                        ],
-                      ),
+  Widget _buildMobileLayout() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          // --- PROMO BAR ---
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 75, 75, 75),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            margin: EdgeInsets.symmetric(
+              horizontal: 20.w,
+            ),
+            padding: EdgeInsets.symmetric(
+              vertical: 15.h,
+              horizontal: 20.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child:
+                      // promo message
+                      Text(
+                    'Explore the grim stories of your mind.',
+                    style: GoogleFonts.federant(
+                      fontSize: 20.sp,
+                      color: const Color.fromARGB(255, 215, 215, 215),
+                      shadows: [
+                        const Shadow(
+                          blurRadius: 25.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          offset: Offset(2.0, 2.0),
+                        )
+                      ],
                     ),
-
-                    // image
-                    Expanded(
-                      child: Image.asset(
-                        'images/skull18.png',
-                        height: 100.h,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 10.h),
-              // hypothetical search bar
-
-              // const SizedBox(height: 25),
-
-              // categories list
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.w),
-                child: Text(
-                  'Genres',
-                  style: GoogleFonts.pirataOne(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 25.sp,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    shadows: [
-                      const Shadow(
-                        blurRadius: 25.0,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        offset: Offset(2.0, 2.0),
-                      )
-                    ],
                   ),
                 ),
-              ),
-
-              SizedBox(height: 10.h),
-
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: genres.length,
-                  itemBuilder: (context, index) => GenreTile(
-                    genre: genres[index],
-                    onTap: () => navigateToGenre(genres[index]),
+                // image
+                Expanded(
+                  child: Image.asset(
+                    'images/skull18.png',
+                    height: 80.h,
                   ),
                 ),
+              ],
+            ),
+          ),
+          // categories list
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              'Genres',
+              style: GoogleFonts.pirataOne(
+                fontSize: 33.sp,
+                color: const Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  const Shadow(
+                    blurRadius: 25.0,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
               ),
-
-              SizedBox(height: 25.h),
-              // --- APP BAR DOWN ---
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 75, 75, 75),
-                  borderRadius: BorderRadius.circular(20.r),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: genres.length,
+              itemBuilder: (context, index) => GenreTile(
+                genre: genres[index],
+                onTap: () => navigateToGenre(genres[index]),
+              ),
+            ),
+          ),
+          // --- APP BAR DOWN ---
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 75, 75, 75),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            margin: EdgeInsets.all(20.w),
+            padding: EdgeInsets.symmetric(
+              vertical: 15.h,
+              horizontal: 20.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // image
+                Expanded(
+                  child: Image.asset(
+                    'images/ancientGreekBoat.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                margin: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 25.h),
-                padding: EdgeInsets.all(10.w),
-                child: Row(
-                  children: [
-                    // image
-                    Expanded(
-                      child: Image.asset(
-                        'images/ancientGreekBoat.png',
-                        //  height: 100,
-                        fit: BoxFit.cover,
-                      ),
+                // text
+                Flexible(
+                  child: Text(
+                    'Traveling the universe for new tales...',
+                    style: GoogleFonts.federant(
+                      fontSize: 20.sp,
+                      color: const Color.fromARGB(255, 215, 215, 215),
+                      shadows: [
+                        const Shadow(
+                          blurRadius: 25.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          offset: Offset(2.0, 2.0),
+                        )
+                      ],
                     ),
-                    SizedBox(width: 10.h),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-                    //text
-                    Flexible(
-                      child: Text(
-                        'Traveling the universe for new tales...',
+  Widget _buildTabletLayout() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          // --- PROMO BAR ---
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 75, 75, 75),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            margin: EdgeInsets.symmetric(
+              horizontal: 20.w,
+            ),
+            padding: EdgeInsets.symmetric(
+              vertical: 15.h,
+              horizontal: 20.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // promo message
+                      Text(
+                        'Explore the grim stories of your mind.',
                         style: GoogleFonts.federant(
                           fontSize: 20.sp,
                           color: const Color.fromARGB(255, 215, 215, 215),
                           shadows: [
                             const Shadow(
-                              blurRadius: 25.0,
+                              blurRadius: 15.0,
                               color: Color.fromARGB(255, 0, 0, 0),
                               offset: Offset(2.0, 2.0),
                             )
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                // image
+                Expanded(
+                  child: Image.asset(
+                    'images/skull18.png',
+                    height: 80.h,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          // categories list
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              'Genres',
+              style: GoogleFonts.pirataOne(
+                fontSize: 32.sp,
+                color: const Color.fromARGB(255, 255, 255, 255),
+                shadows: [
+                  const Shadow(
+                    blurRadius: 15.0,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(2.0, 2.0),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+              ),
+              itemCount: genres.length,
+              itemBuilder: (context, index) => GenreTile(
+                genre: genres[index],
+                onTap: () => navigateToGenre(genres[index]),
+              ),
+            ),
+          ),
+          // --- APP BAR DOWN ---
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 75, 75, 75),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            margin: EdgeInsets.all(20.w),
+            padding: EdgeInsets.symmetric(
+              vertical: 15.h,
+              horizontal: 20.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // image
+                Expanded(
+                  child: Image.asset(
+                    'images/ancientGreekBoat.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // text
+                Flexible(
+                  child: Text(
+                    'Traveling the universe for new tales...',
+                    style: GoogleFonts.federant(
+                      fontSize: 20.sp,
+                      color: const Color.fromARGB(255, 215, 215, 215),
+                      shadows: [
+                        const Shadow(
+                          blurRadius: 15.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          offset: Offset(2.0, 2.0),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
